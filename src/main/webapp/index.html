@@ -31,6 +31,17 @@
         #oppQuiz {
             color: darkorange;
         }
+        .wrapper{
+            background-color: black;
+            width:150px;
+            margin-left: 43.5%;
+        }
+        #tableContain {
+            width: 80%;
+            margin-left: 10%;
+            border: 3px solid green;
+            padding: 15px;
+        }
     </style>
 </head>
 <body> <!-- BODY-------------------------------------------------------------------------------- -->
@@ -66,16 +77,17 @@
         <h2 class="text-center" id="paQuiz">
             Pågående quizer:
         </h2>
-        <table class="table table-hover" id="myTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Navn</th>
-                    <th>Start Time</th>
-                </tr>
-            </thead>
-        </table>
-
+        <div id="tableContain">
+            <table class="table table-hover" id="myTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Navn</th>
+                        <th>Start Time</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
         <!--<h2 class="text-center" id="oppQuiz">
             Oppkommende quizer:
         </h2>
@@ -107,6 +119,8 @@
                 url: 'rest/quiz/getQuizMap/now',
                 dataSrc: ''
             },
+            bAutoWidth: false,
+            dom: '<"wrapper"l>ft<"contain"ip>',
             columns: [
                 { data: 'id' },
                 { data: 'name' },
