@@ -17,5 +17,5 @@ _book
 
 #intelliJ
 *.iml
-*.idea
-target
+.idea/
+target/
