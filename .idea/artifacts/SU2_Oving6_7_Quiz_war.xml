@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="SU2_Oving6-7_Quiz:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="SU2_Oving6-7_Quiz-1.0-SNAPSHOT.war">
-      <element id="artifact" artifact-name="SU2_Oving6-7_Quiz:war exploded" />
-    </root>
-  </artifact>
-</component>
