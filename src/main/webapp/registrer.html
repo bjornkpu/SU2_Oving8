@@ -24,6 +24,7 @@
         #success {
             color: Green;
         }
+
         .form-control {
             width: 100%;
         }
@@ -59,7 +60,7 @@
             <label>Name of the quiz</label>
             <input type="text" class="form-control" id="quizname" placeholder="Name"/>
             <label>Start Time</label>
-            <input type="datetime-local" class="form-control" id="quizStartTime" />
+            <input type="datetime-local" class="form-control" id="quizStartTime" value="2017-06-01T08:30"/>
         </div>
 
         <form class="form-inline">
@@ -70,7 +71,8 @@
                 <input type="text" class="form-control" id="spm1" placeholder="Enter your question"/>
                 <input type="number" class="form-control" id="spm1_time" placeholder="Enter seconds"/><br><br>
 
-                <input type="radio" name="question1" id="1_1cb">
+                <p>Check the correct answer in the checkbox below</p>
+                <input type="radio" name="question1" id="1_1cb" checked>
                 <input type="text" class="form-control" id="1_1" placeholder="Answer 1"/><br>
                 <input type="radio" name="question1" id="1_2cb">
                 <input type="text" class="form-control" id="1_2" placeholder="Answer 2"/><br><br>
@@ -82,7 +84,8 @@
                 <input type="text" class="form-control" id="spm2" placeholder="Enter your question"/>
                 <input type="number" class="form-control" id="spm2_time" placeholder="Enter seconds"/><br><br>
 
-                <input type="radio" name="question2" id="2_1cb">
+                <p>Check the correct answer in the checkbox below</p>
+                <input type="radio" name="question2" id="2_1cb" checked>
                 <input type="text" class="form-control" id="2_1" placeholder="Answer 1"/><br>
                 <input type="radio" name="question2" id="2_2cb">
                 <input type="text" class="form-control" id="2_2" placeholder="Answer 2"/><br><br>
@@ -91,7 +94,7 @@
         </form>
 
         <div id="regBtnDiv">
-            <button id="create" class="btn btn-default">Submit</button><br>
+            <input type="submit" id="create" class="btn btn-default" value="Submit"><br>
             <label id="success"></label>
         </div>
     </div>
@@ -101,6 +104,36 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function ($) {
+
+        Date.prototype.toDateInputValue = (function() {
+            var local = new Date(this);
+            console.log(local);
+            local.setMinutes(this.getMinutes());
+            return local.toJSON().slice(0,10)+"T"+local.getHours()+":"+local.getMinutes();
+        });
+
+        $('#quizStartTime').val(new Date().toDateInputValue());
+
+        function validate() {
+            var inputsWithValues = 0;
+            // get all input fields except for type='submit'
+            var myInputs = $("input:not([type='submit'])");
+
+            myInputs.each(function(e) {
+                // if it has a value, increment the counter
+                if ($(this).val()) {
+                    inputsWithValues += 1;
+                }
+            });
+            if (inputsWithValues == myInputs.length) {
+                $("input[type=submit]").prop("disabled", false);
+            } else {
+                $("input[type=submit]").prop("disabled", true);
+            }
+        }
+
+        validate();
+        $('input').on('keyup', validate);
 
         $("#create").click(function () {
             console.log($("#quizStartTime").val());
